@@ -1,0 +1,32 @@
+*********APPROACH 1 BRUTE FORCE TC = O(N) ***********
+--------------------------------------------------
+*************APPROACH 2 USING BINARY SEARCH ******* TC = O(LOGN)***********
+# include<bits/stdc++.h>
+int floorSqrt(int n)
+{
+    //return sqrt(n);
+    // next approach from binary searc
+    int s = 2;
+    int e = n;
+    if(n == 0||n==1)
+    {
+        return n;
+    }
+    int mid = s + (e-s)/2;
+    int ans;
+    while(s<e)
+    {    if(mid <= n/mid)
+        {
+            ans = mid;
+            s = mid+1;
+        }
+        else 
+        {
+            e = mid;
+        }
+        mid = s + (e-s)/2;
+    }
+
+    return ans;
+
+}
