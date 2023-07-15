@@ -1,0 +1,64 @@
+*******BRUTE FORCE LINEAR SEARCH TC O(N)*************
+--------------------------------------------------------
+*******APPROACH 2 SORT AND THEN USE BS TC = O(NLOGN)***********
+-----------------------------------------------------------------
+*****APPROACH 3 BS FOR FINDING PIVOT AND THEN BS BEFORE AND AFTER PIVOT****TC = O(LOGN)*********
+int p(vector<int>arr, int s, int e)
+{
+    int mid = (s+e)/2;
+    int ans = -1;
+    while(s<=e)
+    {
+        if(arr[mid] < arr[0])
+        {
+           ans = mid;
+           e = mid-1;
+        }
+        else 
+        {
+            s = mid+1;
+        }
+        mid = (s+e)/2;
+    }
+    return ans;
+}
+int bs(vector<int>arr, int x, int s, int e)
+{
+    int mid = (s+e)/2;
+    while(s<=e)
+    {
+        if(arr[mid] == x)
+        {
+            return mid;
+        }
+        else if(arr[mid] < x)
+        {
+            s = mid+1;
+        }
+        else {
+            e = mid-1;
+        }
+        mid = (s+e)/2;
+    }
+
+    return -1;
+}
+int search(vector<int>& arr, int n, int k)
+{
+   int pi = p(arr, 0, n-1);
+   if(pi == -1)
+   {
+       return bs(arr, k, 0, n-1);
+   }
+   else 
+   {
+        if(k >= arr[0])
+       {
+            return bs(arr, k, 0, pi-1);
+       }
+       else 
+       {
+           return bs(arr, k, pi, n-1);
+       }
+   }
+}
